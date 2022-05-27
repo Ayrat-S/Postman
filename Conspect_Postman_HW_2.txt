@@ -82,19 +82,51 @@ Type оставляем default
 *** СНИППЕТЫ.
 Переходим в запрос Login
 Открываем вклаку Tests
+Ставим курсор на 5 строку.
 Под словом Cookies жмем на стрелочку
 Выбираем сниппет Set an environment variable
 В окне Tests появится строка:
 pm.environment.set("variable_key", "variable_value");
 
+Это тот кусочек теста который засунет в наше окружение.
+Вместо "variable_key" введем "token"
+А вместо "variable_value" введем другое значение:
+
+Ставим курсор на 1 строку.
+Выбираем сниппет Response body: JSON value check
+Всплывет текст:
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.value).to.eql(100);
+});
+
+Из этого текста нам нужно взять только:
+    var jsonData = pm.response.json();
+Копируем строку.
+Удаляем последний сниппет.
+
+Ставим курсор на 1 строку.
+Вставляем скопированную строку
+    var jsonData = pm.response.json();
+Изменяем слово var на let
+    let jsonData = pm.response.json();
+
+Ставим курсор на 2 строку и пишем:
+let token = jsonData.token;
+
+Теперь, копируем слово token со 2 строки и вставляем в 5 строку вместо "variable_value", получится:
+pm.environment.set("token", token);
+
+ПОЛУЧИЛСЯ КУСОЧЕК СКРИПТА, который отработает, засунет значение в заранее созданную переменную token, в окружение group_28 которое здесь выбрано:
+========================
+let jsonData = pm.response.json();
+let token = jsonData.token;
 
 
+pm.environment.set("token", token);
+========================
 
-
-
-
-
-
+21:55 остановился
 
 
 
