@@ -36,14 +36,14 @@ age int
 Сохраняем через кнопку Save или Ctrl + S.
 
 4)
-В адресной строке должен появиться текст http://162.55.220.72:5005/get_method?name=str&age=int
+Проверяем - в адресной строке должен появиться текст http://162.55.220.72:5005/get_method?name=str&age=int
 
 5)
 Жмем Send
 Получаем ответ от сервера:
 [
-    "str",
-    "int"
+    "Vasya",
+    "35"
 ]
 
 ==================
@@ -52,9 +52,9 @@ EP_2
 Method: POST
 EndPoint: /user_info_3
 request form data: 
- name: str
- age: int
- salary: int
+ name: Ayrat
+ age: 35
+ salary: 1000
 
 response: 
 {'name': name,
@@ -62,6 +62,43 @@ response:
           'salary': salary,
           'family': {'children': [['Alex', 24], ['Kate', 12]],
                      'u_salary_1_5_year': salary * 4}}
+
+ВЫПОЛНЕНИЕ:
+1)
+В коллекции HW_1 создаем запрос EP_2
+
+2)
+Выбираем метод POST
+Вписываем в адресную строку http://162.55.220.72:5005/user_info_3
+
+3)
+Заходим во вкладку Body и через пункт form-data вносим параметры со значениями:
+name: Vasya
+age: 35
+salary: 2000
+Сохраняем.
+
+4)
+Жмем Send
+Получаем ответ от сервера:
+{
+    "age": "35",
+    "family": {
+        "children": [
+            [
+                "Alex",
+                24
+            ],
+            [
+                "Kate",
+                12
+            ]
+        ],
+        "u_salary_1_5_year": 8000
+    },
+    "name": "Vasya",
+    "salary": 2000
+}
 
 
 ==================
