@@ -91,6 +91,7 @@ salary 5000
     "start_qa_salary": 5000
 }
 
+Если убрать галочку в параметре age, сервер вернет ошибку 500 INTERNAL SERVER ERROR
 
 
 
