@@ -1,0 +1,72 @@
+Group_28
+10.05.2022
+Postman_tests
+
+PyCharm
+
+Создаем запрос Login
+POST
+http://162.55.220.72:5005/login
+В body прописываем ключи
+name Alexey
+password 3432243
+
+Отправляем
+Получаем:
+{
+    "token": "/s34lfgbj/None/jjd909/72980kjkWpqc898None334890evny"
+}
+
+Теперь этот токен нужно автоматически забрать и передать в следующий запрос.
+
+Пока сделаем вручную.
+Запрос, который у нас требует токен (в коде Pyton)
+@app.route('/test_pet_info', methods=['GET', 'POST'])
+Т.е.:
+test_pet_info
+
+Создаем реквест test_pet_info
+POST
+http://162.55.220.72:5005/test_pet_info
+Body, form-data:
+name Mojo
+age 3
+weight 8
+
+Здесь нам нужен еще и токен.
+Если отправить запрос без него, то получим ошибку 500.
+В form-data добавляем ключ: auth_token 
+Вместо значения встявляем предыдущий токен:
+"/s34lfgbj/None/jjd909/72980kjkWpqc898None334890evny"
+
+Сервер должен вернуть результат:
+{
+    "age": 3,
+    "daily_food": 0.096,
+    "daily_sleep": 20.0,
+    "name": "Mojo"
+}
+
+Если токен был с ошибкой в имени пользователя, то сервер вернет текст ошибки:
+"Invalid token. Sign in please"
+
+
+18:00 остановился
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
