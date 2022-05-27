@@ -1,6 +1,5 @@
 {
-  "HW_1_postman": [
-{
+  "HW_1_postman": [ "
 Postman.
 HW_1
 
@@ -360,9 +359,7 @@ salary: 2000
     "qa_salary_after_3.5_years": 7600.0,
     "qa_salary_after_6_months": 4000,
     "start_qa_salary": 2000
-}
-}
-]
-
+} 
+" ]
 
 }
