@@ -316,7 +316,7 @@ http://162.55.220.72
    Рекомендуется не дублировать запросы, а делать с нуля.
 
    Для начала выбираем окружение Environment_group_28
-Создаем запрос:
+Создаем запрос: Request_/new_data_for_check_the_variables_name_salary
 {{url}}:{{port}}/new_data
 POST
 Body => form-data:
@@ -340,7 +340,7 @@ auth_token {{token}}
 27:08
 
 
-    СОЗДАЕМ СКРИПТ В ОКНЕ TESTS
+    ДОБАВЛЕНИЕ СТРОК КОДА ДЛЯ ПРОВЕРКИ ЗНАЧЕНИЯ name В ОКНЕ TESTS.
 В запросе /new_data в окне Tests вносим сниппеты:
 Status code: Code is 200
 Response body: JSON value check (тело ответа: проверка значения JSON)
@@ -453,8 +453,71 @@ pm.test("Your test name", function () {
 PASS Status code is 200
 PASS Your test name
 ========================
-которые говорят о том, что запрос пройден успешно.
+которые говорят о том, что запрос пройден успешно - особое внимание нужно обратить на то, что ответ PASS Your test name говорит о том, что наш код корректно отработал проверку имени пользователя.
 28:45
+
+
+   ДОБАВЛЕНИЕ СТРОК КОДА ДЛЯ ПРОВЕРКИ ЗНАЧЕНИЯ salary, ЧТО ОН РАВЕН 10000, В ОКНЕ TESTS.
+В окне Tests копируем часть кода:
+========================
+let user_name = jsonData.name;
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(user_name).to.eql('Valera');
+});
+========================
+
+в этом коде вносим следующие изменения:
+========================
+let salary_2 = +jsonData.salary[1];
+pm.test("Salary after 2 years", function () {
+    pm.expect(salary_2).to.eql(10000);
+});
+========================
+
+вышеуказанные значения salary и 10000 для изменений в коде берутся из ответа сервера:
+========================
+  "age": 30,
+    "name": "Valera",
+    "salary": [
+        5000,
+        "10000",
+        "15000"
+    ]
+}
+========================
+
+получаем в итоге такой общий код:
+========================
+let jsonData = pm.response.json();
+
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+let user_name = jsonData.name;
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(user_name).to.eql('Valera');
+});
+
+let salary_2 = +jsonData.salary[1];
+pm.test("Salary after 2 years", function () {
+    pm.expect(salary_2).to.eql(10000);
+});
+========================
+Сохранить. Отправить запрос.
+
+во вкладке Test Results проверяем результаты запроса, где должны получить:
+========================
+PASS Status code is 200
+PASS Your test name
+PASS Salary after 2 years
+========================
+которые говорят о том, что запрос пройден успешно - особое внимание нужно обратить на то, что ответ PASS Salary after 2 years говорит о том, что наш код корректно отработал проверку зарплаты через два года.
+30:23
+
 
 
 
