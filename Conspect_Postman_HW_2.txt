@@ -296,27 +296,37 @@ http://162.55.220.72
 {{url}}:{{port}}/test_pet_info
 Сохранить. Отправить запрос.
 Сервер должен вернуть ответ:
-=====
+========================
 {
     "age": 3,
     "daily_food": 0.096,
     "daily_sleep": 20.0,
-    "name": "Mojo"
+    "name": "Rex"
 }
-=====
+========================
+
+*****4*****
 
 
-***CОЗДАТЬ НОВЫЙ РЕКВЕСТ
+
+
+*****5*****
+
+   CОЗДАТЬ НОВЫЙ РЕКВЕСТ
+   Рекомендуется не дублировать запросы, а делать с нуля.
+
+   Для начала выбираем окружение Environment_group_28
+Создаем запрос:
 {{url}}:{{port}}/new_data
 POST
-Body form-data:
+Body => form-data:
 age 30 
 salary 5000
 name Valera
 auth_token {{token}}
 
-Получим ответ:
-======
+Получим response:
+========================
 {
     "age": 30,
     "name": "Valera",
@@ -326,8 +336,130 @@ auth_token {{token}}
         "15000"
     ]
 }
-======
+========================
 27:08
+
+
+    СОЗДАЕМ СКРИПТ В ОКНЕ TESTS
+В запросе /new_data в окне Tests вносим сниппеты:
+Status code: Code is 200
+Response body: JSON value check (тело ответа: проверка значения JSON)
+
+Получаем такой код:
+========================
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.value).to.eql(100);
+});
+========================
+
+копируем вверх строку, которая парсит json:
+========================
+var jsonData = pm.response.json();
+========================
+
+меням var на let
+========================
+let jsonData = pm.response.json();
+========================
+из этой jsonData нам необходимо, что мы проверяем "Your test name"
+
+в части общего кода
+========================
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.value).to.eql(100);
+});
+========================
+вносим изменения, где 
+значение jsonData.value меняем на jsonData.name
+значение to.eql(100) меняем на to.eql('Valera')
+
+вышеуказанные значения name и Valera для изменений в коде берутся из ответа сервера:
+========================
+  "age": 30,
+    "name": "Valera",
+    "salary": [
+        5000,
+        "10000",
+        "15000"
+    ]
+}
+========================
+
+получаем общий код
+========================
+let jsonData = pm.response.json();
+
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.name).to.eql('Valera');
+});
+========================
+
+теперь, в общий код добавляем строку
+========================
+let user_name = jsonData.name;
+========================
+
+и, в строке кода
+========================
+pm.expect(jsonData.name).to.eql('Valera');
+========================
+текст (jsonData.name) меняем на (user_name)
+
+получаем в итоге такой код:
+========================
+let jsonData = pm.response.json();
+
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+let user_name = jsonData.name;
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(user_name).to.eql('Valera');
+});
+========================
+Сохраняем. Отправляем запрос.
+
+Получаем response:
+========================
+{
+    "age": 30,
+    "name": "Valera",
+    "salary": [
+        5000,
+        "10000",
+        "15000"
+    ]
+}
+========================
+
+во вкладке Test Results проверяем результаты запроса, где должны получить:
+========================
+PASS Status code is 200
+PASS Your test name
+========================
+которые говорят о том, что запрос пройден успешно.
+28:45
+
+
+
+
+
 
 
 
