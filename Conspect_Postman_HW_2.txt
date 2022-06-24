@@ -8,18 +8,38 @@ Postman_tests
 КОНСПЕКТ ПО ВИДЕОУРОКУ
 
 *** ТОКЕН
+    Когда пользователь на сервере залогинился, и все его следующие запросы должны быть с этим токеном. Токен показывает что пользователь залогинен. Таким образом сервер видит, что пользователю можно доверять и отдать данные.
+
 Создаем запрос Login
 POST
 http://162.55.220.72:5005/login
-В body прописываем ключи
-name Alexey
+В body => form-data прописываем ключи, которые ожидаются кодом бэкэнда на входе (код см. ниже):
+login Alexey
 password 3432243
 
-Отправляем
-Получаем:
+Response:
 {
-    "token": "/s34lfgbj/None/jjd909/72980kjkWpqc898None334890evny"
+    "token": "/s34lfgbj/Alexey/jjd909/56381kjkWpqc2526343224315000evny"
 }
+
+На сервере код написанный на питоне выглядит так:
+===============================
+
+@app.route('/login', methods=['GET', 'POST'])
+def test_login():
+    
+    if request.method == 'POST':
+        login = request.form.get('login')
+        password = request.form.get('password')
+
+        t_token - str('/s34lfqbj/' + str(login) + '/jjd909/' + str и т.д.
+
+        result = {'token': t_token}
+        login_list[str(login)] = t_token
+
+        return jsonify(result)
+
+===============================
 
 Теперь этот токен нужно автоматически забрать и передать в следующий запрос.
 
