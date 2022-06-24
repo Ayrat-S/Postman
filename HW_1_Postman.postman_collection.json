@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "6a0a7f3d-7271-4f6f-a99a-e0d770d68518",
-		"name": "HW_1",
+		"_postman_id": "131de019-b153-49d2-b82d-ada19a35724e",
+		"name": "HW_1_Postman",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19866732"
 	},
@@ -58,7 +58,7 @@
 						},
 						{
 							"key": "salary",
-							"value": "2000",
+							"value": "1000",
 							"type": "text"
 						}
 					]
@@ -122,7 +122,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://162.55.220.72:5005/object_info_2?name=Ayrat&age=35&salary=2000",
+					"raw": "http://162.55.220.72:5005/object_info_2?name=Ayrat&age=35&salary=1000",
 					"protocol": "http",
 					"host": [
 						"162",
@@ -145,7 +145,7 @@
 						},
 						{
 							"key": "salary",
-							"value": "2000"
+							"value": "1000"
 						}
 					]
 				}
@@ -158,7 +158,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://162.55.220.72:5005/object_info_3?name=Ayrat&age=35&salary=2000",
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Ayrat&age=35&salary=1000",
 					"protocol": "http",
 					"host": [
 						"162",
@@ -181,7 +181,7 @@
 						},
 						{
 							"key": "salary",
-							"value": "2000"
+							"value": "1000"
 						}
 					]
 				}
@@ -194,7 +194,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=2000",
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
 					"protocol": "http",
 					"host": [
 						"162",
@@ -217,7 +217,7 @@
 						},
 						{
 							"key": "salary",
-							"value": "2000"
+							"value": "1000"
 						}
 					]
 				}
@@ -244,7 +244,7 @@
 						},
 						{
 							"key": "salary",
-							"value": "2000",
+							"value": "1000",
 							"type": "text"
 						}
 					]
