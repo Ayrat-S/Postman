@@ -1,0 +1,56 @@
+
+
+
+
+Status code: Code is 200
+============================================
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+============================================
+Здесь по умолчанию ничего не меняется.
+
+
+
+
+
+Response body: Contains string
+============================================
+pm.test("Body matches string", function () {
+    pm.expect(pm.response.text()).to.include("string_you_want_to_search");
+});
+============================================
+где текст в кавычках string_you_want_to_search нужно поменять на тот, который мы ожидаем с response.
+
+
+
+
+
+Response body: JSON value check (тело ответа: проверка значения JSON)
+============================================
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.value).to.eql(100);
+});
+============================================
+в котором подменяются:
+"Your test name" - на понятный текст описания того, что мы вообще проверяем.
+jsonData.value - на созданную переменную в коде.
+100 - на то значение, которое должно быть, которое мы и хотим проверить в итоге (это может быть: текст в одинарных кавычках; цифра без кавычек).
+
+
+
+
+Set an environment variable
+============================================
+pm.environment.set("variable_key", "variable_value");
+============================================
+Вместо "variable_key" ставим переменную с окружения.
+меняем "variable_value" на объявленную переменную в строке кода.
+
+
+
+
+
+
+
