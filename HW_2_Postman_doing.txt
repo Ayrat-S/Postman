@@ -229,28 +229,31 @@ jsonData.value - целиком на созданную переменную в 
 
 7. Спарсить request.
 
-   // Request body parsing:
+Рабочий код:
 ============================================
+// Спарсить URL:
+// var req_data = pm.request.url.query.toObject();
+// var req_data = request.url;
+
+// Спарсить body:
+// var req_data = request.data;
+
+// 1) Request body parsing:
 var req_body_data = request.data;
-pm.environment.set("request_body_parsing", req_body_data);
-
 console.log('data:', req_body_data)
-============================================
-req_body_data - переменная body запроса;
-request.data - парсит body запроса
-"request_body_parsing" - переменная в окружении.
+// Request body test:
+pm.test("Request body test", function () { 
+    pm.expect(req_body_data).to.eql({name: "Ayrat", age: "35", salary: "1000"});
+});
 
-   // Request url parsing:
-============================================
+// 2) Request url parsing:
 var req_url_data = request.url;
-pm.environment.set("request_url_data", req_url_data);
-
 console.log('data:', req_url_data)
+// Request url test:
+pm.test("Request url test", function () { 
+    pm.expect(req_url_data).to.eql("http://162.55.220.72:5005/user_info_3");
+});
 ============================================
-req_url_data - переменная url запроса;
-request.url - парсит url запроса;
-"request_url_data" - переменная в окружении.
-
 
 
 
@@ -290,25 +293,60 @@ console.log('user name request:', user_name_request);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 9. Проверить, что age в ответе равно age s request (age забрать из request.)
+
+Рабочий код:
+============================================
+// Response body parsing:
+let jsonData = pm.response.json();
+// Response name parsing:
+let user_age_response = jsonData.age;
+// Request name parsing:
+let user_age_request = request.data.age;
+
+
+// Compare response and request user age:
+pm.test("Compare response and request user age", function () { 
+    pm.expect(user_age_response).to.eql(user_age_request);
+});
+
+
+console.log('user age response:', user_age_response);
+console.log('user age request:', user_age_request);
+============================================
+в строке
+pm.expect(user_age_response).to.eql(user_age_request);
+проверяется уравнение двух переменных:
+user_age_response
+и
+user_age_request
+
+
 10. Проверить, что salary в ответе равно salary s request (salary забрать из request.)
+Рабочий код:
+============================================
+// Response body parsing:
+let jsonData = pm.response.json();
+// Response user salary parsing:
+let user_salary_response = +jsonData.salary;
+// Request user salary parsing:
+let user_salary_request = +request.data.salary;
+
+
+// Compare response and request user salary:
+pm.test("Compare response and request user salary", function () { 
+    pm.expect(user_salary_response).to.eql(user_salary_request);
+});
+
+
+console.log('user salary response:', user_salary_response);
+console.log('user salary request:', user_salary_request);
+============================================
+
+
+
+
+
 11. Вывести в консоль параметр family из response.
 12. Проверить что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)
 
