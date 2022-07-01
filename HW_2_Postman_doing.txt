@@ -322,7 +322,9 @@ user_age_response
 user_age_request
 
 
+
 10. Проверить, что salary в ответе равно salary s request (salary забрать из request.)
+
 Рабочий код:
 ============================================
 // Response body parsing:
@@ -345,10 +347,60 @@ console.log('user salary request:', user_salary_request);
 
 
 
-
-
 11. Вывести в консоль параметр family из response.
+
+Рабочий код:
+============================================
+// Response body parsing:
+let jsonData = pm.response.json();
+// Response user family parsing:
+let user_family_response = jsonData.family;
+
+
+console.log('user family response:', user_family_response);
+============================================
+
+
+
+
 12. Проверить что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)
+
+Рабочий код:
+============================================
+// Response body parsing:
+let jsonData = pm.response.json();
+// Response u_salary_1_5_year parsing:
+let salary_after_1_5_year = jsonData.family.u_salary_1_5_year;
+// Response user salary parsing:
+let user_salary = jsonData.salary;
+
+// Compare user salary:
+pm.test("Compare user salary after 1.5 year", function () { 
+    pm.expect(salary_after_1_5_year).to.eql(user_salary*4);
+});
+
+
+console.log('salary_after_1_5_year:', salary_after_1_5_year);
+console.log('user_salary:', user_salary);
+============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ОСТАНОВИЛСЯ ЗДЕСЬ ======>>>>>>>
 
 http://162.55.220.72:5005/object_info_3
 1. Отправить запрос.
