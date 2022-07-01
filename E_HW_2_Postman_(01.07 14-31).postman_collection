@@ -1,0 +1,471 @@
+{
+	"info": {
+		"_postman_id": "6439ce53-6790-40ac-b54d-2b7b6d528892",
+		"name": "E_HW_2_Postman_(25.06 19:27)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19866732"
+	},
+	"item": [
+		{
+			"name": "TASK_1_Request_/first",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"This is the first responce from server!\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/first",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"first"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TASK_2_Parse_response_body_in_json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// 2. Статус код 200\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 3. Спарсить response body в json.\r",
+							"let jsonData = pm.response.json();\r",
+							"let money = jsonData.salary;\r",
+							"pm.environment.set(\"salary_variable\", money);\r",
+							"\r",
+							"console.log('variable \"jsonData\":', jsonData);\r",
+							"console.log('variable \"money\":', money);\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Ayrat",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Проверить, что name в ответе равно name s request (name вбить руками.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"let user_name = jsonData.name;\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(user_name).to.eql('Ayrat');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"console.log('variable \"jsonData\":', jsonData);\r",
+							"console.log('variable \"jsonData 2\":', pm.response.json());\r",
+							"console.log('variable \"user_name\":', user_name);\r",
+							"console.log('variable \"user_name 2\":', jsonData.name);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Ayrat",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Проверить, что age в ответе равно age s request (age вбить руками.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"let user_age = jsonData.age;\r",
+							"pm.test(\"Your test age\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(user_age).to.eql('35');\r",
+							"});\r",
+							"\r",
+							"console.log('variable \"jsonData\":', jsonData);\r",
+							"console.log('variable \"jsonData 2\":', pm.response.json());\r",
+							"console.log('variable \"user_age\":', user_age);\r",
+							"console.log('variable \"user_age 2\":', jsonData.age);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Ayrat",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. Проверить, что salary в ответе равно salary s request (salary вбить руками.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"let user_salary = jsonData.salary;\r",
+							"\r",
+							"pm.test(\"Your test salary\", function () { \r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(user_salary).to.eql(1000);\r",
+							"});\r",
+							"\r",
+							"console.log('variable \"jsonData\":', jsonData);\r",
+							"console.log('variable \"jsonData 2\":', pm.response.json());\r",
+							"console.log('variable \"user_salary\":', user_salary);\r",
+							"console.log('variable \"user_salary 2\":', jsonData.salary);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Ayrat",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Спарсить request.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Спарсить URL:\r",
+							"// var req_data = pm.request.url.query.toObject();\r",
+							"\r",
+							"// Спарсить body:\r",
+							"// var req_data = request.data;\r",
+							"\r",
+							"// Request body parsing:\r",
+							"var req_body_data = request.data;\r",
+							"pm.environment.set(\"request_body_parsing\", req_body_data);\r",
+							"\r",
+							"console.log('data:', req_body_data)\r",
+							"\r",
+							"// Request url parsing:\r",
+							"var req_url_data = request.url;\r",
+							"pm.environment.set(\"request_url_data\", req_url_data);\r",
+							"\r",
+							"console.log('data:', req_url_data)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Ayrat",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. Проверить, что name в ответе равно name s request (name забрать из request.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Response body parsing:\r",
+							"let jsonData = pm.response.json();\r",
+							"// Response name parsing:\r",
+							"let user_name_response = jsonData.name;\r",
+							"// Request name parsing:\r",
+							"let user_name_request = request.data.name;\r",
+							"\r",
+							"// Compare response and request user name:\r",
+							"pm.test(\"Compare response and request user name\", function () { \r",
+							"    pm.expect(user_name_response).to.eql(user_name_request);\r",
+							"});\r",
+							"\r",
+							"// Response name Test:\r",
+							"// pm.test(\"Your response test name\", function () { \r",
+							"//     pm.expect(user_name_response).to.eql(\"Ayrat\");\r",
+							"// });\r",
+							"\r",
+							"\r",
+							"// Request name Test:\r",
+							"// pm.test(\"Your request test name\", function () { \r",
+							"//     pm.expect(user_name_request).to.eql(\"Ayrat\");\r",
+							"// });\r",
+							"\r",
+							"\r",
+							"console.log('user name response:', user_name_response);\r",
+							"console.log('user name request:', user_name_request);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Ayrat",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

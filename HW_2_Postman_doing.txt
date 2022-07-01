@@ -114,11 +114,7 @@ console.log('variable "money":', money);
 
 
 
-   TASK 3
 4. Проверить, что name в ответе равно name s request (name вбить руками.)
-
-   ВЫПОЛНЕНИЕ TASK 3:
-Имя файла в постман: TASK_3_Проверить, что name в ответе равно name s request (name вбить руками.)
 
 Рабочий код сверки значения name в запросе и ответе:
 ============================================
@@ -163,11 +159,7 @@ console.log('variable "user_name 2":', jsonData.name);
 
 
 
-   TASK 4
 5. Проверить, что age в ответе равно age s request (age вбить руками.)
-
-   ВЫПОЛНЕНИЕ TASK 4:
-Имя файла в постман: TASK_4_Проверить, что age в ответе равно age s request (age вбить руками.)
 
 Рабочий код сверки значения age в запросе и ответе:
 ============================================
@@ -202,11 +194,7 @@ jsonData.value - целиком на созданную переменную в 
 
 
 
-   TASK 5
 6. Проверить, что salary в ответе равно salary s request (salary вбить руками.)
-
-   ВЫПОЛНЕНИЕ TASK 5:
-Имя файла в постман: TASK_5_Проверить, что salary в ответе равно salary s request (salary вбить руками.)
 
 Рабочий код сверки значения salary в запросе и ответе:
 ============================================
@@ -239,9 +227,9 @@ jsonData.value - целиком на созданную переменную в 
 
 
 
-
 7. Спарсить request.
-// Request body parsing:
+
+   // Request body parsing:
 ============================================
 var req_body_data = request.data;
 pm.environment.set("request_body_parsing", req_body_data);
@@ -252,7 +240,7 @@ req_body_data - переменная body запроса;
 request.data - парсит body запроса
 "request_body_parsing" - переменная в окружении.
 
-// Request url parsing:
+   // Request url parsing:
 ============================================
 var req_url_data = request.url;
 pm.environment.set("request_url_data", req_url_data);
@@ -264,7 +252,61 @@ request.url - парсит url запроса;
 "request_url_data" - переменная в окружении.
 
 
+
+
 8. Проверить, что name в ответе равно name s request (name забрать из request.)
+
+Рабочий код:
+============================================
+// Response body parsing:
+let jsonData = pm.response.json();
+// Response name parsing:
+let user_name_response = jsonData.name;
+// Request name parsing:
+let user_name_request = request.data.name;
+
+// Name Test:
+pm.test("Request and response comparing test name is true", function () { 
+    pm.expect(user_name_response).to.eql(user_name_request);
+});
+
+// Response name Test:
+pm.test("Your response test name", function () { 
+    pm.expect(user_name_response).to.eql("Ayrat");
+});
+
+
+// Request name Test:
+pm.test("Your request test name", function () { 
+    pm.expect(user_name_request).to.eql("Ayrat");
+});
+
+
+console.log('user name response:', user_name_response);
+console.log('user name request:', user_name_request);
+============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 9. Проверить, что age в ответе равно age s request (age забрать из request.)
 10. Проверить, что salary в ответе равно salary s request (salary забрать из request.)
 11. Вывести в консоль параметр family из response.
