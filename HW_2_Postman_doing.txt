@@ -137,7 +137,7 @@ console.log('variable "user_name 2":', jsonData.name);
 ============================================
 
 Описание логики кода:
-1) Объявляется переменная в коде
+1) Объявляется переменная (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
 let jsonData = pm.response.json();
 значение которой является ответ с сервера в формате json, который подтягивается через утверждение pm.response.json(); 
 2) Объявляется переменная в коде
@@ -186,7 +186,7 @@ console.log('variable "user_name 2":', jsonData.name);
 ============================================
 
 Шаги воспроизведения:
-1) Объявляется переменная 
+1) Объявляется переменная (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
 let jsonData = pm.response.json();
 2) Объявляется переменная в коде
 let user_age = jsonData.age;
@@ -215,6 +215,23 @@ console.log('variable "user_age 2":', jsonData.age);
 6. Проверить, что salary в ответе равно salary s request (salary вбить руками.)
 
    ВЫПОЛНЕНИЕ TASK 5:
+Имя файла в постман: TASK_5_Проверить, что salary в ответе равно salary s request (salary вбить руками.)
+
+Шаги воспроизведения:
+1) Объявляется переменная (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
+let jsonData = pm.response.json();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
