@@ -137,7 +137,7 @@ console.log('variable "user_name 2":', jsonData.name);
 ============================================
 
 Описание логики кода:
-1) Объявляется переменная (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
+1) Объявляется переменная в коде (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
 let jsonData = pm.response.json();
 значение которой является ответ с сервера в формате json, который подтягивается через утверждение pm.response.json(); 
 2) Объявляется переменная в коде
@@ -178,15 +178,10 @@ pm.test("Your test age", function () {
     var jsonData = pm.response.json();
     pm.expect(user_age).to.eql('35');
 });
-
-console.log('variable "jsonData":', jsonData);
-console.log('variable "jsonData 2":', pm.response.json());
-console.log('variable "user_name":', jsonData);
-console.log('variable "user_name 2":', jsonData.name);
 ============================================
 
 Шаги воспроизведения:
-1) Объявляется переменная (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
+1) Объявляется переменная в коде (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
 let jsonData = pm.response.json();
 2) Объявляется переменная в коде
 let user_age = jsonData.age;
@@ -202,11 +197,7 @@ pm.test("Your test name", function () {
 "Your test name" - на текст описания того, что мы проверяем ("Your test age").
 jsonData.value - целиком на созданную переменную в коде (user_age).
 100 - на то значение, которое должно быть, которое мы и хотим проверить в итоге, т.е. в нашем случае это должен быть возраст 35
-4) В качестве любопытства можно дополнительно вывести в консоль значения переменных:
-console.log('variable "jsonData":', jsonData);
-console.log('variable "jsonData 2":', pm.response.json());
-console.log('variable "user_age":', user_age);
-console.log('variable "user_age 2":', jsonData.age);
+
 
 
 
@@ -217,28 +208,62 @@ console.log('variable "user_age 2":', jsonData.age);
    ВЫПОЛНЕНИЕ TASK 5:
 Имя файла в постман: TASK_5_Проверить, что salary в ответе равно salary s request (salary вбить руками.)
 
-Шаги воспроизведения:
-1) Объявляется переменная (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
+Рабочий код сверки значения salary в запросе и ответе:
+============================================
 let jsonData = pm.response.json();
 
+let user_salary = jsonData.salary;
 
+pm.test("Your test salary", function () { 
+    pm.expect(user_salary).to.eql(1000);
+});
+============================================
 
-
-
-
-
-
-
-
-
-
-
-
+Шаги воспроизведения:
+1) Объявляется переменная в коде (это часть строки сниппета: "Response body: JSON value check" - с заменой var на let):
+let jsonData = pm.response.json();
+2) Объявляется переменная в коде
+let user_salary = jsonData.salary; 
+где salary после jsonData. это переменная с ответа сервера в формате json (отрывок ответа сервера: "salary": 1000).
+3) Выбирается сниппет Response body: JSON value check (тело ответа: проверка значения JSON)
+============================================
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.value).to.eql(100);
+});
+============================================
+в котором подменяются:
+"Your test name" - на текст описания того, что мы проверяем ("Your test salary").
+jsonData.value - целиком на созданную переменную в коде (user_salary).
+100 - на то значение, которое должно быть, которое мы и хотим проверить в итоге, т.е. в нашем случае это должна быть заработная плата 1000
 
 
 
 
 7. Спарсить request.
+// Request body parsing:
+============================================
+var req_body_data = request.data;
+pm.environment.set("request_body_parsing", req_body_data);
+
+console.log('data:', req_body_data)
+============================================
+req_body_data - переменная body запроса;
+request.data - парсит body запроса
+"request_body_parsing" - переменная в окружении.
+
+// Request url parsing:
+============================================
+var req_url_data = request.url;
+pm.environment.set("request_url_data", req_url_data);
+
+console.log('data:', req_url_data)
+============================================
+req_url_data - переменная url запроса;
+request.url - парсит url запроса;
+"request_url_data" - переменная в окружении.
+
+
 8. Проверить, что name в ответе равно name s request (name забрать из request.)
 9. Проверить, что age в ответе равно age s request (age забрать из request.)
 10. Проверить, что salary в ответе равно salary s request (salary забрать из request.)
