@@ -1,18 +1,226 @@
 HW_2 Postman
 
 
+
+
+
+   TASK 1
 http://162.55.220.72:5005/first
 1. Отправить запрос.
 2. Статус код 200
 3. Проверить, что в body приходит правильный string.
 
+   ВЫПОЛНЕНИЕ TASK 1:
+Имя файла в постман: TASK_1_Request_/first
+
+1) По методу GET получаем ответ:
+This is the first responce from server!
+
+2) Ставим сниппет: Status code: Code is 200
+и получаем код, который не нужно видоизменять:
+============================================
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+============================================
+
+3) Ставим сниппет: Response body: Contains string
+получаем код, который нужно изменить:
+============================================
+pm.test("Body matches string", function () {
+    pm.expect(pm.response.text()).to.include("string_you_want_to_search");
+});
+============================================
+где текст в кавычках string_you_want_to_search нужно поменять на тот, который мы ожидаем с response:
+This is the first responce from server!
+
+Итоговый код, который проверяет, что в body приходит правильный string:
+============================================
+pm.test("Body matches string", function () {
+    pm.expect(pm.response.text()).to.include("This is the first responce from server!");
+});
+============================================
+
+
+
+
+
+   TASK 2
 http://162.55.220.72:5005/user_info_3
 1. Отправить запрос.
 2. Статус код 200
 3. Спарсить response body в json.
+
+   ВЫПОЛНЕНИЕ TASK 2:
+Имя файла в постман: TASK_2_Parse_response_body_in_json
+
+Рабочий код парсинга response body в json:
+============================================
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+let jsonData = pm.response.json();
+let money = jsonData.salary;
+pm.environment.set("salary_variable", money);
+
+console.log('variable "jsonData":', jsonData);
+console.log('variable "money":', money);
+============================================
+
+// Описание логики кода:
+// 1) Создается переменная salary_variable в окружении.
+// 2) Выбираем сниппет: Set an environment variable
+// 3) Получаем код: pm.environment.set("variable_key", "variable_value");
+// 4) Вместо "variable_key" ставим переменную с окружения "salary_variable"
+// получаем строку кода: pm.environment.set("salary_variable", "variable_value");
+// 5) Выбираем сниппет: Response body: JSON value check
+// 6) Получаем код:
+// pm.test("Your test name", function () {
+//     var jsonData = pm.response.json();
+//     pm.expect(jsonData.value).to.eql(100);
+// });
+// 7) Из этого кода забираем только строку
+// var jsonData = pm.response.json();
+// и var меняем на let.
+// 8) Объявляем переменную money в коде:
+// let money = jsonData.salary;
+// где salary это переменная с ответа сервера.
+// 9) В строке кода: pm.environment.set("salary_variable", "variable_value");
+// меняем "variable_value" на объявленную переменную money
+// после чего получаем строку кода: pm.environment.set("salary_variable", money);
+// 10) Внизу кода ставим еще сниппет для статус кода 200: 
+// Status code: Code is 200
+// 11) Получаем код в котором ничего не меняем и ставим его вверх кода:
+// pm.test("Status code is 200", function () {
+//     pm.response.to.have.status(200);
+// });
+// 12) Далее в самый низ кода добавляем вывод текста переменных в консоль, для визуального контроля:
+// console.log('variable "jsonData":', jsonData);
+// console.log('variable "money":', money);
+// 13) Сохраняем и отправляем запрос.
+// Готово, весь код должен выглядеть так:
+// pm.test("Status code is 200", function () {
+//     pm.response.to.have.status(200);
+// });
+//
+// let jsonData = pm.response.json();
+// let money = jsonData.salary;
+// pm.environment.set("salary_variable", money);
+//
+// console.log('variable "jsonData":', jsonData);
+// console.log('variable "money":', money);
+
+
+
+
+   TASK 3
 4. Проверить, что name в ответе равно name s request (name вбить руками.)
+
+   ВЫПОЛНЕНИЕ TASK 3:
+Имя файла в постман: TASK_3_Проверить, что name в ответе равно name s request (name вбить руками.)
+
+Рабочий код сверки значения name в запросе и ответе:
+============================================
+let jsonData = pm.response.json();
+
+let user_name = jsonData.name;
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(user_name).to.eql('Ayrat');
+});
+
+console.log('variable "jsonData":', jsonData);
+console.log('variable "jsonData 2":', pm.response.json());
+console.log('variable "user_name":', jsonData);
+console.log('variable "user_name 2":', jsonData.name);
+============================================
+
+Описание логики кода:
+1) Объявляется переменная в коде
+let jsonData = pm.response.json();
+значение которой является ответ с сервера в формате json, который подтягивается через утверждение pm.response.json(); 
+2) Объявляется переменная в коде
+let user_name = jsonData.name;
+где name после jsonData. это переменная с ответа сервера в формате json (отрывок ответа сервера: "name": "Ayrat",).
+3) Выбирается сниппет Response body: JSON value check (тело ответа: проверка значения JSON)
+============================================
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.value).to.eql(100);
+});
+============================================
+в котором подменяются:
+"Your test name" - на текст описания того, что мы проверяем (в данном случае ничего не меняем, т.к. как раз проверяем значение имени пользователя).
+jsonData.value - целиком на созданную переменную в коде (user_name).
+100 - на то значение, которое должно быть, которое мы и хотим проверить в итоге, т.е. в нашем случае это должен быть имя Ayrat
+4) В качестве любопытства можно дополнительно вывести в консоль значения переменных:
+console.log('variable "jsonData":', jsonData);
+console.log('variable "jsonData 2":', pm.response.json());
+console.log('variable "user_name":', user_name);
+console.log('variable "user_name 2":', jsonData.name);
+
+
+
+
+   TASK 4
 5. Проверить, что age в ответе равно age s request (age вбить руками.)
+
+   ВЫПОЛНЕНИЕ TASK 4:
+Имя файла в постман: TASK_4_Проверить, что age в ответе равно age s request (age вбить руками.)
+
+Рабочий код сверки значения age в запросе и ответе:
+============================================
+let jsonData = pm.response.json();
+
+let user_age = jsonData.age;
+pm.test("Your test age", function () {
+    var jsonData = pm.response.json();
+    pm.expect(user_age).to.eql('35');
+});
+
+console.log('variable "jsonData":', jsonData);
+console.log('variable "jsonData 2":', pm.response.json());
+console.log('variable "user_name":', jsonData);
+console.log('variable "user_name 2":', jsonData.name);
+============================================
+
+Шаги воспроизведения:
+1) Объявляется переменная 
+let jsonData = pm.response.json();
+2) Объявляется переменная в коде
+let user_age = jsonData.age;
+где age после jsonData. это переменная с ответа сервера в формате json (отрывок ответа сервера: "age": "35",).
+3) Выбирается сниппет Response body: JSON value check (тело ответа: проверка значения JSON)
+============================================
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.value).to.eql(100);
+});
+============================================
+в котором подменяются:
+"Your test name" - на текст описания того, что мы проверяем ("Your test age").
+jsonData.value - целиком на созданную переменную в коде (user_age).
+100 - на то значение, которое должно быть, которое мы и хотим проверить в итоге, т.е. в нашем случае это должен быть возраст 35
+4) В качестве любопытства можно дополнительно вывести в консоль значения переменных:
+console.log('variable "jsonData":', jsonData);
+console.log('variable "jsonData 2":', pm.response.json());
+console.log('variable "user_age":', user_age);
+console.log('variable "user_age 2":', jsonData.age);
+
+
+
+
+   TASK 5
 6. Проверить, что salary в ответе равно salary s request (salary вбить руками.)
+
+   ВЫПОЛНЕНИЕ TASK 5:
+
+
+
+
+
+
 7. Спарсить request.
 8. Проверить, что name в ответе равно name s request (name забрать из request.)
 9. Проверить, что age в ответе равно age s request (age забрать из request.)
