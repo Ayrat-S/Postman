@@ -157,6 +157,7 @@
 							"    pm.expect(user_name_response).to.eql(user_name_request);\r",
 							"});\r",
 							"\r",
+							"// Variables checking:\r",
 							"console.log('user name response:', user_name_response);\r",
 							"console.log('user name request:', user_name_request);"
 						],
@@ -212,9 +213,72 @@
 							"let user_age_response = jsonData.age;\r",
 							"// Request age parsing:\r",
 							"let user_age_request = pm.request.url.query.toObject().age;\r",
+							"\r",
 							"// Compare response and request user age:\r",
 							"pm.test(\"Compare response and request user age (GET)\", function () {\r",
 							"    pm.expect(user_age_response).to.eql(user_age_request);\r",
+							"});\r",
+							"\r",
+							"// Variables checking:\r",
+							"console.log('user_age_response:', user_age_response);\r",
+							"console.log('user_age_request:', user_age_request);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. Проверить, что salary в ответе равно salary s request (salary забрать из request.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 7. Проверить, что salary в ответе равно salary s request (salary забрать из request.)\r",
+							"// Response body parsing:\r",
+							"let jsonData = pm.response.json();\r",
+							"// Parsing response user salary:\r",
+							"let Parsing_response_user_salary = jsonData.salary;\r",
+							"// Parsing request user salary:\r",
+							"let parsing_request_user_salary = pm.response.url.query.toObject().salary;\r",
+							"\r",
+							"// Compare response and request user salary:\r",
+							"pm.test(\"Compare request and response user salary (GET)\", function () {\r",
+							"    pm.expect(Parsing_response_user_salary).to.eql(parsing_request_user_salary);\r",
 							"});\r",
 							"\r",
 							"// Variables checking:\r",
