@@ -402,6 +402,7 @@ console.log('user_salary:', user_salary);
 
 ОСТАНОВИЛСЯ ЗДЕСЬ ======>>>>>>>
 
+E_HW_2_Postman_TASK_3_(07.07 00:00)
 http://162.55.220.72:5005/object_info_3
 1. Отправить запрос.
 2. Статус код 200
