@@ -219,7 +219,7 @@
 							"    pm.expect(user_age_response).to.eql(user_age_request);\r",
 							"});\r",
 							"\r",
-							"// Variables checking:\r",
+							"// // Variables checking:\r",
 							"console.log('user_age_response:', user_age_response);\r",
 							"console.log('user_age_request:', user_age_request);"
 						],
@@ -272,18 +272,18 @@
 							"// Response body parsing:\r",
 							"let jsonData = pm.response.json();\r",
 							"// Parsing response user salary:\r",
-							"let Parsing_response_user_salary = jsonData.salary;\r",
+							"let response_user_salary = jsonData.salary;\r",
 							"// Parsing request user salary:\r",
-							"let parsing_request_user_salary = pm.response.url.query.toObject().salary;\r",
+							"let request_user_salary = +pm.request.url.query.toObject().salary;\r",
 							"\r",
 							"// Compare response and request user salary:\r",
 							"pm.test(\"Compare request and response user salary (GET)\", function () {\r",
-							"    pm.expect(Parsing_response_user_salary).to.eql(parsing_request_user_salary);\r",
+							"    pm.expect(response_user_salary).to.eql(request_user_salary);\r",
 							"});\r",
 							"\r",
 							"// Variables checking:\r",
-							"console.log('user_age_response:', user_age_response);\r",
-							"console.log('user_age_request:', user_age_request);"
+							"console.log('response_user_salary:', response_user_salary);\r",
+							"console.log('request_user_salary:', request_user_salary);"
 						],
 						"type": "text/javascript"
 					}
@@ -387,15 +387,177 @@
 					"script": {
 						"exec": [
 							"// 9. Проверить, что у параметра dog есть параметры name.\r",
-							"// \r",
-							"// pm.test(\"Dog name?\", () => {\r",
-							"//     pm.expect(pm.response.json(\"dog\")).to.have.property(\"name\");\r",
-							"// });\r",
-							"\r",
-							"pm.test(\"Dog name?\", function () {\r",
+							"pm.test(\"Have dog name?\", function () {\r",
 							"    pm.expect(pm.response.json(\"dog\")).to.have.property(\"name\");\r",
 							"});\r",
 							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10. Проверить, что у параметра dog есть параметры age.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 10. Проверить, что у параметра dog есть параметры age.\r",
+							"pm.test(\"Have dog age?\", function () {\r",
+							"    pm.expect(pm.response.json(\"dog\")).to.have.property(\"age\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11. Проверить, что параметр name имеет значение Luky.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 11. Проверить, что параметр name имеет значение Luky.\r",
+							"// Парсим json ответа:\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Объявить переменную значению параметра name:\r",
+							"let dog_name = jsonData.family.pets.dog.name;\r",
+							"console.log('dog_name:', dog_name);\r",
+							"\r",
+							"// Тестируем,что параметр name имеет значение Luky:\r",
+							"pm.test(\"Dog test name\", function () {\r",
+							"    pm.expect(dog_name).to.eql(\"Luky\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12. Проверить, что параметр age имеет значение 4.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 12. Проверить, что параметр age имеет значение 4.\r",
+							"// Парсим json ответа:\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Объявить переменную значению параметра age:\r",
+							"let dog_age = +jsonData.family.pets.dog.age;\r",
+							"console.log('dog_age:', dog_age);\r",
+							"\r",
+							"// Тестируем,что параметр name имеет значение 4:\r",
+							"pm.test(\"Dog test age\", function () {\r",
+							"    pm.expect(dog_age).to.eql(4);\r",
+							"});\r",
 							""
 						],
 						"type": "text/javascript"
