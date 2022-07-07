@@ -1,65 +1,19 @@
 {
 	"info": {
 		"_postman_id": "6439ce53-6790-40ac-b54d-2b7b6d528892",
-		"name": "E_HW_2_Postman_(25.06 19:27)",
+		"name": "E_HW_2_Postman_TASK_2_(25.06 19:27)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19866732"
 	},
 	"item": [
 		{
-			"name": "TASK_1_Request_/first",
+			"name": "1. Отправить запрос. / 2. Статус код 200 / 3. Спарсить response body в json.",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Body matches string\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"This is the first responce from server!\");\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "http://162.55.220.72:5005/first",
-					"protocol": "http",
-					"host": [
-						"162",
-						"55",
-						"220",
-						"72"
-					],
-					"port": "5005",
-					"path": [
-						"first"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "TASK_2_Parse_response_body_in_json",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
+							"// 1. Отправить запрос.\r",
 							"\r",
 							"// 2. Статус код 200\r",
 							"pm.test(\"Status code is 200\", function () {\r",
@@ -68,12 +22,7 @@
 							"\r",
 							"// 3. Спарсить response body в json.\r",
 							"let jsonData = pm.response.json();\r",
-							"let money = jsonData.salary;\r",
-							"pm.environment.set(\"salary_variable\", money);\r",
-							"\r",
-							"console.log('variable \"jsonData\":', jsonData);\r",
-							"console.log('variable \"money\":', money);\r",
-							"\r",
+							"console.log('response_parsing:', jsonData);\r",
 							"\r",
 							"\r",
 							""
@@ -129,6 +78,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"// 4. Проверить, что name в ответе равно name s request (name вбить руками.)\r",
 							"let jsonData = pm.response.json();\r",
 							"\r",
 							"let user_name = jsonData.name;\r",
@@ -195,6 +145,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"// 5. Проверить, что age в ответе равно age s request (age вбить руками.)\r",
 							"let jsonData = pm.response.json();\r",
 							"\r",
 							"let user_age = jsonData.age;\r",
@@ -260,6 +211,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"// 6. Проверить, что salary в ответе равно salary s request (salary вбить руками.)\r",
 							"let jsonData = pm.response.json();\r",
 							"\r",
 							"let user_salary = jsonData.salary;\r",
@@ -319,36 +271,22 @@
 			"response": []
 		},
 		{
-			"name": "7. Спарсить request.",
+			"name": "7. Спарсить request. (POST-body)",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"// Спарсить URL:\r",
-							"// var req_data = pm.request.url.query.toObject();\r",
-							"// var req_data = request.url;\r",
-							"\r",
-							"// Спарсить body:\r",
-							"// var req_data = request.data;\r",
-							"\r",
-							"// 1) Request body parsing:\r",
+							"// 7. Спарсить request.\r",
+							"// если парсить URL - var req_data = pm.request.url.query.toObject();\r",
+							"// Если body - var req_data = request.data;\r",
 							"var req_body_data = request.data;\r",
 							"console.log('data:', req_body_data)\r",
-							"// Request body test:\r",
+							"\r",
+							"        // Request body test:\r",
 							"pm.test(\"Request body test\", function () { \r",
 							"    pm.expect(req_body_data).to.eql({name: \"Ayrat\", age: \"35\", salary: \"1000\"});\r",
 							"});\r",
-							"\r",
-							"// 2) Request url parsing:\r",
-							"var req_url_data = request.url;\r",
-							"console.log('data:', req_url_data)\r",
-							"// Request url test:\r",
-							"pm.test(\"Request url test\", function () { \r",
-							"    pm.expect(req_url_data).to.eql(\"http://162.55.220.72:5005/user_info_3\");\r",
-							"});\r",
-							"\r",
-							"\r",
 							"\r",
 							""
 						],
