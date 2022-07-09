@@ -570,8 +570,68 @@
 							"let request_salary = +pm.request.url.query.toObject().salary;\r",
 							"console.log('request_salary:', request_salary)\r",
 							"// Проверить, что 1-й элемент параметра salary равен salary*2 из request:\r",
-							"pm.test(\"Your test salary_0\", function () {\r",
+							"pm.test(\"Your test salary_1\", function () {\r",
 							"    pm.expect(response_salary_1).to.eql(request_salary*2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "14. Проверить, что 2-й элемент параметра salary равен salary*3 из request (salary забрать из request.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 14. Проверить, что 2-й элемент параметра salary равен salary*3 из request (salary забрать из request.)\r",
+							"// Спарсить json с респонза:\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log('jsonData', jsonData);\r",
+							"// Спарсить параметр из response:\r",
+							"let response_salary_2 = +jsonData.salary[2];\r",
+							"console.log('response_salary_2:', response_salary_2);\r",
+							"// Спарсить параметр с реквеста:\r",
+							"let request_salary = +pm.request.url.query.toObject().salary;\r",
+							"console.log('request_salary:', request_salary)\r",
+							"// Проверить, что 2-й элемент параметра salary равен salary*3 из request:\r",
+							"pm.test(\"Your test salary_2\", function () {\r",
+							"    pm.expect(response_salary_2).to.eql(request_salary*3);\r",
 							"});"
 						],
 						"type": "text/javascript"
