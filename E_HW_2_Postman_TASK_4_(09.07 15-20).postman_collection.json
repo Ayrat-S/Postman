@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "New Request",
+			"name": "1. Отправить запрос. / 2. Статус код 200 / 3. Спарсить response body в json.",
 			"event": [
 				{
 					"listen": "test",
@@ -23,25 +23,114 @@
 							"// 3. Спарсить response body в json.\r",
 							"let jsonData = pm.response.json();\r",
 							"console.log('jsonData:', jsonData)\r",
-							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Спарсить request. (GET)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
 							"// 4. Спарсить request.\r",
 							"let request_parsing_url_query = pm.request.url.query.toObject();\r",
 							"console.log('request_parsing_url_query:', request_parsing_url_query)\r",
-							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Проверить, что name в ответе равно name s request (name забрать из request.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
 							"// 5. Проверить, что name в ответе равно name s request (name забрать из request.)\r",
-							"// Задать переменную для name с ответа:\r",
-							"let request_name = jsonData.name;\r",
+							"// Спарсить параметр с реквеста:\r",
+							"let request_name = pm.response.json().name;\r",
 							"console.log('request_name', request_name);\r",
-							"// Задать переменную для name с запроса:\r",
+							"// Спарсить параметр с респонза:\r",
 							"let response_name = pm.request.url.query.toObject().name;\r",
 							"console.log('response_name', response_name);\r",
-							"// Написать тест для сравнения параметров с ответа и запроса:\r",
+							"// Пишем тест для сравнения параметра с реквеста и респонза (сниппет Response body: JSON value check):\r",
 							"pm.test(\"Your test name\", function () {\r",
 							"    pm.expect(request_name).to.eql(response_name);\r",
 							"});\r",
-							"\r",
-							"\r",
-							"\r",
 							"\r",
 							""
 						],
