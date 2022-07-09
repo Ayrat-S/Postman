@@ -171,6 +171,64 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "6. Проверить, что age в ответе равно age из request (age забрать из request.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 6. Проверить, что age в ответе равно age из request (age забрать из request.)\r",
+							"// Спарсить параметр с реквеста:\r",
+							"let request_age = pm.response.json().age;\r",
+							"console.log('request_age', request_age);\r",
+							"// Спарсить параметр с респонза:\r",
+							"let response_age = +pm.request.url.query.toObject().age;\r",
+							"console.log('response_age', response_age);\r",
+							"// Пишем тест для сравнения параметра с реквеста и респонза (сниппет Response body: JSON value check):\r",
+							"pm.test(\"Your test age\", function () {\r",
+							"    pm.expect(request_age).to.eql(response_age);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
