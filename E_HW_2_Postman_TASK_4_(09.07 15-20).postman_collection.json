@@ -339,7 +339,7 @@
 					"script": {
 						"exec": [
 							"// 9. Вывести в консоль 0-й элемент параметра salary из response.\r",
-							"// Спарсить параметр с респонза:\r",
+							"// Спарсить json с респонза:\r",
 							"let jsonData = pm.response.json();\r",
 							"console.log('jsonData', jsonData);\r",
 							"// Вывести в консоль 0-й элемент параметра salary из response:\r",
@@ -347,6 +347,232 @@
 							"console.log('response_salary_0', response_salary_0);\r",
 							"\r",
 							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10. Вывести в консоль 1-й элемент параметра salary параметр salary из response.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 10. Вывести в консоль 1-й элемент параметра salary параметр salary из response.\r",
+							"// Спарсить json с респонза:\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log('jsonData', jsonData);\r",
+							"// Вывести в консоль 1-й элемент параметра salary параметр salary из responsee:\r",
+							"let response_salary_1 = +jsonData.salary[1];\r",
+							"console.log('response_salary_1', response_salary_1);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11. Вывести в консоль 2-й элемент параметра salary параметр salary из response.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 11. Вывести в консоль 2-й элемент параметра salary параметр salary из response.\r",
+							"// Спарсить json с респонза:\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log('jsonData', jsonData);\r",
+							"// Вывести в консоль 1-й элемент параметра salary параметр salary из responsee:\r",
+							"let response_salary_2 = +jsonData.salary[2];\r",
+							"console.log('response_salary_2', response_salary_2);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12. Проверить, что 0-й элемент параметра salary равен salary из request (salary забрать из request.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 12. Проверить, что 0-й элемент параметра salary равен salary из request (salary забрать из request.)\r",
+							"// Спарсить json с респонза:\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log('jsonData', jsonData);\r",
+							"// Спарсить параметр из response:\r",
+							"let response_salary_0 = +jsonData.salary[0];\r",
+							"console.log('response_salary_0:', response_salary_0);\r",
+							"// Спарсить параметр с реквеста:\r",
+							"let request_salary = +pm.request.url.query.toObject().salary;\r",
+							"console.log('request_salary:', request_salary)\r",
+							"// Проверить, что 0-й элемент параметра salary равен salary из request:\r",
+							"pm.test(\"Your test salary_0\", function () {\r",
+							"    pm.expect(response_salary_0).to.eql(request_salary);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "13. Проверить, что 1-й элемент параметра salary равен salary*2 из request (salary забрать из request.)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 13. Проверить, что 1-й элемент параметра salary равен salary*2 из request (salary забрать из request.)\r",
+							"// Спарсить json с респонза:\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log('jsonData', jsonData);\r",
+							"// Спарсить параметр из response:\r",
+							"let response_salary_1 = +jsonData.salary[1];\r",
+							"console.log('response_salary_1:', response_salary_1);\r",
+							"// Спарсить параметр с реквеста:\r",
+							"let request_salary = +pm.request.url.query.toObject().salary;\r",
+							"console.log('request_salary:', request_salary)\r",
+							"// Проверить, что 1-й элемент параметра salary равен salary*2 из request:\r",
+							"pm.test(\"Your test salary_0\", function () {\r",
+							"    pm.expect(response_salary_1).to.eql(request_salary*2);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
