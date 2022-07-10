@@ -950,13 +950,72 @@
 							"console.log(\"salary_by_fingers\", salary_by_fingers);\r",
 							"pm.environment.set(\"salary\", salary_by_fingers)\r",
 							"// Передача в окружение через response:\r",
-							"let response_salary = pm.response.json().salary[0];\r",
+							"let response_salary = +pm.response.json().salary[0];\r",
 							"console.log(\"response_salary\", response_salary);\r",
 							"pm.environment.set(\"salary\", response_salary)\r",
 							"// Передача в окружение через request:\r",
 							"let request_salary = +pm.request.url.query.toObject().salary;\r",
 							"console.log(\"request_salary\", request_salary);\r",
 							"pm.environment.set(\"salary\", request_salary)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "21. Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 21. Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.\r",
+							"// Парсим response:\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(\"jsonData\", jsonData);\r",
+							"// Парсим параметр 0 из salary в консоль:\r",
+							"let salary_0 = +pm.response.json().salary[0];\r",
+							"console.log(\"salary_0\", salary_0);\r",
+							"// Парсим параметр 1 из salary в консоль:\r",
+							"let salary_1 = +pm.response.json().salary[1];\r",
+							"console.log(\"salary_1\", salary_1);\r",
+							"// Парсим параметр 2 из salary в консоль:\r",
+							"let salary_2 = +pm.response.json().salary[2];\r",
+							"console.log(\"salary_2\", salary_2)"
 						],
 						"type": "text/javascript"
 					}
