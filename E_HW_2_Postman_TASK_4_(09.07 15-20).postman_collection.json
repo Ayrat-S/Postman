@@ -877,6 +877,65 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "19. Передать в окружение переменную age",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 19. Передать в окружение переменную age\r",
+							"// Передача в окружение вручную:\r",
+							"let age_by_fingers = 35;\r",
+							"console.log(\"age_by_fingers\", age_by_fingers);\r",
+							"pm.environment.set(\"age\", age_by_fingers)\r",
+							"// Передача в окружение через response:\r",
+							"let response_age = pm.response.json().age;\r",
+							"console.log(\"response_age\", response_age);\r",
+							"pm.environment.set(\"age\", response_age)\r",
+							"// Передача в окружение через request:\r",
+							"let request_age = +pm.request.url.query.toObject().age;\r",
+							"console.log(\"request_age\", request_age);\r",
+							"pm.environment.set(\"age\", request_age)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
