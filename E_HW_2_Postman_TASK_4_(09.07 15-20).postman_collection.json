@@ -671,6 +671,212 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "15. Создать в окружении переменную name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 15. Создать в окружении переменную name\r",
+							"pm.environment.set(\"name\",);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "16. Создать в окружении переменную age",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 16. Создать в окружении переменную age\r",
+							"pm.environment.set(\"age\",)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "17. Создать в окружении переменную salary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 17. Создать в окружении переменную salary\r",
+							"pm.environment.set(\"salary\",)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "18. Передать в окружение переменную name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 18. Передать в окружение переменную name\r",
+							"// Передача в окружение вручную:\r",
+							"let name_by_fingers = \"Ayrat\";\r",
+							"console.log(\"name_by_fingers\", name_by_fingers);\r",
+							"pm.environment.set(\"name\", name_by_fingers)\r",
+							"// Передача в окружение через response:\r",
+							"let response_name = pm.response.json().name;\r",
+							"console.log(\"response_name\", response_name);\r",
+							"pm.environment.set(\"name\", response_name)\r",
+							"// Передача в окружение через request:\r",
+							"let request_name = pm.request.url.query.toObject().name;\r",
+							"console.log(\"request_name\", request_name);\r",
+							"pm.environment.set(\"name\", request_name)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Ayrat&age=35&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ayrat"
+						},
+						{
+							"key": "age",
+							"value": "35"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
